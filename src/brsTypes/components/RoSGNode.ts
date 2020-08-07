@@ -363,6 +363,7 @@ export class RoSGNode extends BrsComponent implements BrsValue, BrsIterable {
                 this.createchildren,
                 this.replacechildren,
                 this.insertchildren,
+                this.getscene,
             ],
             ifSGNodeFocus: [this.hasfocus, this.setfocus, this.isinfocuschain],
             ifSGNodeDict: [
@@ -1415,6 +1416,19 @@ export class RoSGNode extends BrsComponent implements BrsValue, BrsIterable {
                 }
             }
             return BrsBoolean.False;
+        },
+    });
+
+    /**
+     * Returns the node's root Scene. This returns a valid Scene even if the node is not parented.
+     */
+    private getscene = new Callable("getscene", {
+        signature: {
+            args: [],
+            returns: ValueKind.Dynamic,
+        },
+        impl: (interpreter: Interpreter) => {
+            return mGlobal.get(new BrsString("scene"));
         },
     });
 

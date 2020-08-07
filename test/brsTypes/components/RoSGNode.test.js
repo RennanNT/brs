@@ -1092,6 +1092,7 @@ describe("RoSGNode", () => {
             child2 = new RoSGNode([{ name: new BrsString("child"), value: new BrsString("3") }]);
             child3 = new RoSGNode([{ name: new BrsString("child"), value: new BrsString("4") }]);
             child4 = new RoSGNode([{ name: new BrsString("child"), value: new BrsString("5") }]);
+            scene = new RoSGNode([{ name: new BrsString("Scene"), value: new BrsString("6") }]);
         });
 
         describe("getchildcount", () => {

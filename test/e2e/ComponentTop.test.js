@@ -30,6 +30,8 @@ describe("m.top usage in scenegraph components", () => {
             "false",
             "300",
             "100",
+            "invalid",
+            "scene",
             "this value set using m.top",
             "invalid",
         ]);

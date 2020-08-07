@@ -10,6 +10,17 @@ sub init()
     childRect = m.top.findNode("childRectangle")
     print childRect.width
     print childRect.height
+
+
+    print m.top.getScene() ' => invalid
+
+    sceneNode = CreateObject("roSGNode", "Node")
+    sceneNode.id = "scene"
+    m.global.addFields({
+        scene: sceneNode
+    })
+
+    print m.top.getScene().id ' => scene
 end sub
 
 function getDefaultTopValue() as string

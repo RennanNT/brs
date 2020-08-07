@@ -177,6 +177,16 @@ sub init()
     ' returns the node subtype
     print "Node subtype is returned:" n.subtype()                       ' => Node
 
+    ' returns the invalid node scene
+    print "Node root scene is returned:" n.getScene()                       ' => Invalid
+    
+    sceneNode = createObject("roSGNode", "Node")
+    sceneNode.id = "scene"
+    sceneNode.name = "Scene"
+    _brs_.global.scene = sceneNode
+    ' returns node scene with id "scene"
+    print "Node root scene name is returned:" n.getScene().name                       ' => Scene
+
     ' calling update function without optional createFields parameter doesn't add new fields
     node = createObject("roSGNode", "Node")
     node.id = "originalId"
