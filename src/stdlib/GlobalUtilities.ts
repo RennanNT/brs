@@ -5,7 +5,6 @@ import {
     BrsString,
     BrsType,
     StdlibArgument,
-    RoAssociativeArray,
     BrsInterface,
 } from "../brsTypes";
 import { BrsComponent } from "../brsTypes/components/BrsComponent";
@@ -57,5 +56,15 @@ export const FindMemberFunction = new Callable("FindMemberFunction", {
         });
 
         return iface;
+    },
+});
+
+export const Box = new Callable("Box", {
+    signature: {
+        args: [new StdlibArgument("source", ValueKind.String)],
+        returns: ValueKind.String,
+    },
+    impl: (interpreter, source: BrsString): BrsString | BrsInvalid => {
+        return source;
     },
 });

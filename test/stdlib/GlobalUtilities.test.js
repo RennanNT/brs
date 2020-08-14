@@ -1,6 +1,6 @@
 const brs = require("brs");
 const { RoAssociativeArray, BrsString, BrsInvalid, BrsInterface, RoSGNode } = brs.types;
-const { GetInterface, FindMemberFunction } = require("../../lib/stdlib");
+const { GetInterface, FindMemberFunction, Box } = require("../../lib/stdlib");
 const { Interpreter } = require("../../lib/interpreter");
 
 describe("global utility functions", () => {
@@ -56,6 +56,14 @@ describe("global utility functions", () => {
 
             expect(memberFunction).toBeInstanceOf(BrsInterface);
             expect(memberFunction.name).toBe("ifSGNodeDict");
+        });
+
+        it("box function is available", () => {
+            let value = new BrsString("boxedString");
+
+            let boxResult = Box.call(interpreter, value);
+            expect(boxResult).toBeInstanceOf(BrsString);
+            expect(boxResult).toBe(value);
         });
     });
 });
