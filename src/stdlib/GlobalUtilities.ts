@@ -59,14 +59,3 @@ export const FindMemberFunction = new Callable("FindMemberFunction", {
         return iface;
     },
 });
-
-export const Tr = new Callable("Tr", {
-    signature: {
-        args: [new StdlibArgument("source", ValueKind.String)],
-        returns: ValueKind.String,
-    },
-    impl: (interpreter, source: BrsString): BrsString | BrsInvalid => {
-        console.warn("Warning: `Tr` is not implemented in `brs`.");
-        return source;
-    },
-});

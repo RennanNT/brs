@@ -1,6 +1,6 @@
 const brs = require("brs");
 const { RoAssociativeArray, BrsString, BrsInvalid, BrsInterface, RoSGNode } = brs.types;
-const { GetInterface, FindMemberFunction, Tr } = require("../../lib/stdlib");
+const { GetInterface, FindMemberFunction } = require("../../lib/stdlib");
 const { Interpreter } = require("../../lib/interpreter");
 
 describe("global utility functions", () => {
@@ -56,13 +56,6 @@ describe("global utility functions", () => {
 
             expect(memberFunction).toBeInstanceOf(BrsInterface);
             expect(memberFunction.name).toBe("ifSGNodeDict");
-        });
-    });
-
-    describe("Tr", () => {
-        it("returns source value", () => {
-            let invalidSource = new BrsString("My source");
-            expect(Tr.call(interpreter, invalidSource)).toBe(invalidSource);
         });
     });
 });
