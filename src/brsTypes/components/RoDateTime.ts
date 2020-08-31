@@ -389,4 +389,8 @@ export class RoDateTime extends BrsComponent implements BrsValue {
             return BrsInvalid.Instance;
         },
     });
+
+    clone(): RoDateTime {
+        return this;
+    }
 }

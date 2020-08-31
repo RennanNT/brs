@@ -468,7 +468,7 @@ export class RoString extends BrsComponent implements BrsValue, Comparable, Unbo
         },
     });
 
-    private decodeUriComponent = new Callable("DecodeUriCOmponent", {
+    private decodeUriComponent = new Callable("DecodeUriComponent", {
         signature: {
             args: [],
             returns: ValueKind.String,
@@ -485,4 +485,11 @@ export class RoString extends BrsComponent implements BrsValue, Comparable, Unbo
         },
         impl: (_interpreter) => this.intrinsic,
     });
+
+    /**
+     * Boxed strings are not clonable.
+     */
+    clone(): RoString {
+        return this;
+    }
 }

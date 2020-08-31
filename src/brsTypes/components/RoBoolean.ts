@@ -73,4 +73,11 @@ export class roBoolean extends BrsComponent implements BrsValue, Unboxable {
             return new BrsString(this.intrinsic.toString());
         },
     });
+
+    /**
+     * Boxed boolean are not clonable.
+     */
+    clone(): roBoolean {
+        return this;
+    }
 }

@@ -53,4 +53,11 @@ export class roInvalid extends BrsComponent implements BrsValue, Unboxable {
             return new BrsString(this.intrinsic.toString());
         },
     });
+
+    /**
+     * Boxed invalid are not clonable.
+     */
+    clone(): roInvalid {
+        return this;
+    }
 }

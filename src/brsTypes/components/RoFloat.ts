@@ -74,4 +74,11 @@ export class roFloat extends BrsComponent implements BrsValue, Unboxable {
             return new BrsString(this.intrinsic.toString());
         },
     });
+
+    /**
+     * Boxed floats are not clonable.
+     */
+    clone(): roFloat {
+        return this;
+    }
 }

@@ -369,4 +369,12 @@ export class RoArray extends BrsComponent implements BrsValue, BrsIterable {
             return BrsBoolean.from(this.elements.length === 0);
         },
     });
+
+    clone(): RoArray {
+        return new RoArray(
+            this.elements.map((e: BrsValue) => {
+                return e.clone();
+            })
+        );
+    }
 }

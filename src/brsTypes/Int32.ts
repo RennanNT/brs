@@ -236,4 +236,8 @@ export class Int32 implements Numeric, Comparable, Boxable {
     box() {
         return new roInt(this);
     }
+
+    clone(): Int32 {
+        return new Int32(this.value);
+    }
 }

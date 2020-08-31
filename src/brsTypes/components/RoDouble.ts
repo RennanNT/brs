@@ -74,4 +74,11 @@ export class roDouble extends BrsComponent implements BrsValue, Unboxable {
             return new BrsString(this.intrinsic.toString());
         },
     });
+
+    /**
+     * Boxed doubles are not clonable.
+     */
+    clone(): roDouble {
+        return this;
+    }
 }

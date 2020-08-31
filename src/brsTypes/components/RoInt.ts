@@ -77,4 +77,11 @@ export class roInt extends BrsComponent implements BrsValue, Unboxable {
             return new BrsString(this.intrinsic.toString());
         },
     });
+
+    /**
+     * Boxed integers are not clonable.
+     */
+    clone(): roInt {
+        return this;
+    }
 }

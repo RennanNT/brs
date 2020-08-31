@@ -92,4 +92,8 @@ export class Timespan extends BrsComponent implements BrsValue {
             return new Int32(dateAsSeconds);
         },
     });
+
+    clone(): Timespan {
+        return this;
+    }
 }

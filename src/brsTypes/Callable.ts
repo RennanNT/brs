@@ -324,4 +324,8 @@ export class Callable implements Brs.BrsValue {
             }),
         ];
     }
+
+    clone(): Callable {
+        return this;
+    }
 }

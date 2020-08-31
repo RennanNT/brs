@@ -223,4 +223,8 @@ export class Int64 implements Numeric, Comparable, Boxable {
     box() {
         return new roLongInteger(this);
     }
+
+    clone(): Int64 {
+        return new Int64(this.value);
+    }
 }

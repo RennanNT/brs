@@ -201,6 +201,13 @@ export interface BrsValue {
      * @returns `true` if this value is strictly equal to the `other` value, otherwise `false`.
      */
     equalTo(other: BrsType): BrsBoolean;
+
+    /**
+     * Create a copy of the value, useful to functions which takes a copy of the value,
+     * not the reference.
+     * @returns a copy of the current value
+     */
+    clone(): BrsType;
 }
 
 /** The set of operations required for a BrightScript datatype to be compared to another. */
@@ -265,6 +272,10 @@ export class BrsString implements BrsValue, Comparable, Boxable {
 
     box() {
         return new RoString(this);
+    }
+
+    clone(): BrsString {
+        return new BrsString(this.value);
     }
 }
 
@@ -338,6 +349,10 @@ export class BrsBoolean implements BrsValue, Comparable, Boxable {
     not(): BrsBoolean {
         return BrsBoolean.from(!this.value);
     }
+
+    clone(): BrsBoolean {
+        return new BrsBoolean(this.value);
+    }
 }
 
 /** Internal representation of the BrightScript `invalid` value. */
@@ -371,6 +386,10 @@ export class BrsInvalid implements BrsValue, Comparable, Boxable {
     box() {
         return new roInvalid();
     }
+
+    clone(): BrsInvalid {
+        return BrsInvalid.Instance;
+    }
 }
 
 /** Internal representation of uninitialized BrightScript variables. */
@@ -400,5 +419,9 @@ export class Uninitialized implements BrsValue, Comparable {
 
     toString(parent?: BrsType) {
         return "<UNINITIALIZED>";
+    }
+
+    clone(): Uninitialized {
+        return Uninitialized.Instance;
     }
 }

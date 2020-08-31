@@ -224,4 +224,8 @@ export class Float implements Numeric, Comparable, Boxable {
     box() {
         return new roFloat(this);
     }
+
+    clone(): Float {
+        return new Float(this.value);
+    }
 }

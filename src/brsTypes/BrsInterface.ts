@@ -22,4 +22,8 @@ export class BrsInterface implements BrsValue {
         // interfaces are never equal to anything (they can't be compared, just like arrays)
         return BrsBoolean.False;
     }
+
+    clone(): BrsInterface {
+        return this;
+    }
 }

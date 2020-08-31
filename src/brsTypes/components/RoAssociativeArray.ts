@@ -321,4 +321,13 @@ export class RoAssociativeArray extends BrsComponent implements BrsValue, BrsIte
             return BrsBoolean.from(this.elements.size === 0);
         },
     });
+
+    clone(): RoAssociativeArray {
+        let aaMembers: AAMember[] = [];
+        this.elements.forEach((value, key) => {
+            aaMembers.push({ name: new BrsString(key), value: value.clone() });
+        });
+        let roAssociativeArray = new RoAssociativeArray(aaMembers);
+        return roAssociativeArray;
+    }
 }

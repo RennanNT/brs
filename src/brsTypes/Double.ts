@@ -209,4 +209,8 @@ export class Double implements Numeric, Comparable, Boxable {
     box() {
         return new roDouble(this);
     }
+
+    clone(): Double {
+        return new Double(this.value);
+    }
 }

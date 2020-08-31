@@ -69,4 +69,8 @@ export class RoSGNodeEvent extends BrsComponent implements BrsValue {
             return this.node.get(new BrsString("id"));
         },
     });
+
+    clone(): RoSGNodeEvent {
+        return this;
+    }
 }

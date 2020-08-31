@@ -1760,6 +1760,13 @@ export class RoSGNode extends BrsComponent implements BrsValue, BrsIterable {
             }
         });
     }
+
+    /**
+     * RoSGNode is not clonable
+     */
+    clone(): RoSGNode {
+        return this;
+    }
 }
 
 // A node that represents the m.global, referenced by all other nodes
