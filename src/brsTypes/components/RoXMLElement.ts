@@ -19,6 +19,10 @@ export class RoXMLElement extends BrsComponent implements BrsValue {
         });
     }
 
+    clone(): RoXMLElement {
+        return this;
+    }
+
     toString(parent?: BrsType) {
         return "<Component: roXMLElement>";
     }

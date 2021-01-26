@@ -76,4 +76,8 @@ export class roLongInteger extends BrsComponent implements BrsValue, Unboxable {
             return new BrsString(this.intrinsic.toString());
         },
     });
+
+    clone(): roLongInteger {
+        return new roLongInteger(this.intrinsic);
+    }
 }
