@@ -1,25 +1,55 @@
-import { BrsType, Callable, ValueKind, BrsString, Int32, Float, StdlibArgument } from "../brsTypes";
+import {
+    BrsType,
+    Callable,
+    ValueKind,
+    BrsString,
+    Int32,
+    Float,
+    StdlibArgument,
+    RoString,
+    BrsInvalid,
+    ArgumentMismatch,
+} from "../brsTypes";
 import * as Expr from "../parser/Expression";
 import { Interpreter } from "../interpreter";
 import { BrsNumber } from "../brsTypes/BrsNumber";
 import { Lexeme } from "../lexer";
+import { BrsError } from "../Error";
 
 /** Converts the string to all uppercase. */
 export const UCase = new Callable("UCase", {
     signature: {
-        args: [new StdlibArgument("s", ValueKind.String)],
+        args: [new StdlibArgument("s", ValueKind.Object)],
         returns: ValueKind.String,
     },
-    impl: (interpreter: Interpreter, s: BrsString) => new BrsString(s.value.toUpperCase()),
+    impl: (interpreter: Interpreter, s: BrsType) => {
+        if (s instanceof BrsString) return new BrsString(s.value.toUpperCase());
+        else if (s instanceof RoString) {
+            return new BrsString(s.getValue().toUpperCase());
+        } else {
+            throw new Error(
+                `Expected string or roString types. Received ${ValueKind.toString(s.kind)}`
+            );
+        }
+    },
 });
 
 /** Converts the string to all lowercase. */
 export const LCase = new Callable("LCase", {
     signature: {
-        args: [new StdlibArgument("s", ValueKind.String)],
+        args: [new StdlibArgument("s", ValueKind.Object)],
         returns: ValueKind.String,
     },
-    impl: (interpreter: Interpreter, s: BrsString) => new BrsString(s.value.toLowerCase()),
+    impl: (interpreter: Interpreter, s: BrsType) => {
+        if (s instanceof BrsString) return new BrsString(s.value.toLowerCase());
+        else if (s instanceof RoString) {
+            return new BrsString(s.getValue().toLowerCase());
+        } else {
+            throw new Error(
+                `Expected string or roString types. Received ${ValueKind.toString(s.kind)}`
+            );
+        }
+    },
 });
 
 /**
