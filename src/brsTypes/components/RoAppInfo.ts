@@ -142,4 +142,8 @@ export class RoAppInfo extends BrsComponent implements BrsValue {
             return value != null ? new BrsString(value.toString()) : new BrsString("");
         },
     });
+
+    clone(): RoAppInfo {
+        return this;
+    }
 }
