@@ -624,13 +624,16 @@ export class RoSGNode extends BrsComponent implements BrsValue, BrsIterable {
                     this.nodeSubtype.toLowerCase()
                 );
 
+                const clonedFunctionArgs = functionargs.map((arg) => arg.clone());
+
                 // Only allow public functions (defined in the interface) to be called.
                 if (componentDef && functionname.value in componentDef.functions) {
                     // Use the mocked component functions instead of the real one, if it's a mocked component.
                     if (interpreter.environment.isMockedObject(this.nodeSubtype.toLowerCase())) {
                         let maybeMethod = this.getMethod(functionname.value);
                         return (
-                            maybeMethod?.call(interpreter, ...functionargs) || BrsInvalid.Instance
+                            maybeMethod?.call(interpreter, ...clonedFunctionArgs) ||
+                            BrsInvalid.Instance
                         );
                     }
 
@@ -649,15 +652,15 @@ export class RoSGNode extends BrsComponent implements BrsValue, BrsIterable {
 
                         try {
                             // Determine whether the function should get arguments or not.
-                            if (functionToCall.getFirstSatisfiedSignature(functionargs)) {
-                                return functionToCall.call(subInterpreter, ...functionargs);
+                            if (functionToCall.getFirstSatisfiedSignature(clonedFunctionArgs)) {
+                                return functionToCall.call(subInterpreter, ...clonedFunctionArgs);
                             } else if (functionToCall.getFirstSatisfiedSignature([])) {
                                 return functionToCall.call(subInterpreter);
                             } else {
                                 return interpreter.addError(
                                     generateArgumentMismatchError(
                                         functionToCall,
-                                        functionargs,
+                                        clonedFunctionArgs,
                                         subInterpreter.stack[subInterpreter.stack.length - 1]
                                     )
                                 );
