@@ -389,9 +389,15 @@ export class End extends AstNode implements Statement {
         super("End");
     }
 
-    accept<R>(_visitor: Visitor<R>): BrsType {
+    accept<R>(visitor: Visitor<R>): BrsType {
         //TODO implement this in the runtime. It should immediately terminate program execution, without error
-        throw new Error("Not implemented");
+        //throw new Error("Not implemented");
+        console.log("Found 'END' statement, ignoring it");
+        return visitor.visitReturn(
+            new Return({
+                return: this.tokens.end,
+            })
+        );
     }
 
     get location() {

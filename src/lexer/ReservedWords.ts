@@ -48,6 +48,7 @@ export const ReservedWords = new Set([
     "true",
     "type",
     "while",
+    "END",
 ]);
 
 /**
