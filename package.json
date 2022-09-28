@@ -10,6 +10,8 @@
     "brs": "./bin/cli.js"
   },
   "scripts": {
+    "prepare": "npm run build",
+    "build": "rimraf ./lib ./types ./bin && tsc",
     "build": "tsc",
     "watch": "tsc -w",
     "clean": "rimraf ./lib ./types",
@@ -57,7 +59,7 @@
     "lolex": "^3.0.0",
     "npm-run-all": "^4.1.2",
     "prettier": "2",
-    "rimraf": "^2.6.2",
+    "rimraf": "^3.0.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "4"
@@ -70,11 +72,6 @@
     "trailingComma": "es5",
     "tabWidth": 4,
     "printWidth": 100
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{ts,js}": [
