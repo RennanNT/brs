@@ -345,6 +345,11 @@ export class RoSGNode extends BrsComponent implements BrsValue, BrsIterable {
                 this.setfield,
                 this.setfields,
                 this.update,
+                this.moveintofield,
+                this.movefromfield,
+                this.setref,
+                this.getref,
+                this.cangetref,
             ],
             ifSGNodeChildren: [
                 this.appendchild,
@@ -1057,6 +1062,122 @@ export class RoSGNode extends BrsComponent implements BrsValue, BrsIterable {
         impl: (interpreter: Interpreter, fieldname: BrsString) => {
             this.fields.delete(fieldname.value.toLowerCase());
             return BrsBoolean.True; //RBI always returns true
+        },
+    });
+
+    /** The field named `fieldname`, if it exists and holds an associative array. */
+    private assocArrayField(fieldname: BrsString): Field | undefined {
+        let field = this.fields.get(fieldname.value.toLowerCase());
+        if (field && field.getType() === FieldKind.AssocArray) {
+            return field;
+        }
+        return undefined;
+    }
+
+    /**
+     * RSG 1.3 `MoveIntoField`: moves the members of `data` into the field, leaving
+     * the caller's associative array empty. brs shares references rather than
+     * copying, so nothing is ever copied; the count of copied objects is always 0.
+     * As on the device, field observers do fire.
+     */
+    private moveintofield = new Callable("moveintofield", {
+        signature: {
+            args: [
+                new StdlibArgument("fieldname", ValueKind.String),
+                new StdlibArgument("data", ValueKind.Object),
+            ],
+            returns: ValueKind.Int32,
+        },
+        impl: (interpreter: Interpreter, fieldname: BrsString, data: BrsType) => {
+            let field = this.assocArrayField(fieldname);
+            if (!field || !(data instanceof RoAssociativeArray)) {
+                interpreter.stderr.write(
+                    `MoveIntoField: '${fieldname.value}' is not an associative array field of ${this.nodeSubtype}, or the data is not an associative array\n`
+                );
+                return new Int32(0);
+            }
+            let moved = new RoAssociativeArray([]);
+            data.elements.forEach((value, key) => moved.set(new BrsString(key), value));
+            data.elements.clear();
+            this.set(fieldname, moved);
+            return new Int32(0);
+        },
+    });
+
+    /**
+     * RSG 1.3 `MoveFromField`: returns the field's associative array and leaves the
+     * field empty (invalid). Field observers fire, as measured on the device.
+     * The array is handed back as-is rather than emptied into a new one: on a
+     * device the field holds its own copy, but in brs an assignment shares the
+     * caller's object, and emptying it would wipe that caller's reference too.
+     */
+    private movefromfield = new Callable("movefromfield", {
+        signature: {
+            args: [new StdlibArgument("fieldname", ValueKind.String)],
+            returns: ValueKind.Dynamic,
+        },
+        impl: (interpreter: Interpreter, fieldname: BrsString) => {
+            let field = this.assocArrayField(fieldname);
+            if (!field) {
+                interpreter.stderr.write(
+                    `MoveFromField: '${fieldname.value}' is not an associative array field of ${this.nodeSubtype}\n`
+                );
+                return BrsInvalid.Instance;
+            }
+            let value = field.getValue();
+            if (!(value instanceof RoAssociativeArray)) {
+                return BrsInvalid.Instance;
+            }
+            this.set(fieldname, BrsInvalid.Instance);
+            return value;
+        },
+    });
+
+    /** RSG 1.3 `SetRef`: stores `data` in the field by reference (brs never copies). */
+    private setref = new Callable("setref", {
+        signature: {
+            args: [
+                new StdlibArgument("fieldname", ValueKind.String),
+                new StdlibArgument("data", ValueKind.Object),
+            ],
+            returns: ValueKind.Boolean,
+        },
+        impl: (interpreter: Interpreter, fieldname: BrsString, data: BrsType) => {
+            let field = this.assocArrayField(fieldname);
+            if (!field || !(data instanceof RoAssociativeArray)) {
+                return BrsBoolean.False;
+            }
+            this.set(fieldname, data);
+            return BrsBoolean.True;
+        },
+    });
+
+    /** RSG 1.3 `GetRef`: the field's associative array by reference, or invalid. */
+    private getref = new Callable("getref", {
+        signature: {
+            args: [new StdlibArgument("fieldname", ValueKind.String)],
+            returns: ValueKind.Dynamic,
+        },
+        impl: (interpreter: Interpreter, fieldname: BrsString) => {
+            let field = this.assocArrayField(fieldname);
+            if (!field) {
+                return BrsInvalid.Instance;
+            }
+            return field.getValue();
+        },
+    });
+
+    /** RSG 1.3 `CanGetRef`: whether `GetRef` would return the field's value. */
+    private cangetref = new Callable("cangetref", {
+        signature: {
+            args: [new StdlibArgument("fieldname", ValueKind.String)],
+            returns: ValueKind.Boolean,
+        },
+        impl: (interpreter: Interpreter, fieldname: BrsString) => {
+            let field = this.assocArrayField(fieldname);
+            return BrsBoolean.from(
+                field !== undefined && field.getValue() instanceof RoAssociativeArray
+            );
         },
     });
 

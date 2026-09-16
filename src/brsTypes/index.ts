@@ -50,6 +50,7 @@ export * from "./components/MarkupGrid";
 export * from "./components/ContentNode";
 export * from "./components/Timer";
 export * from "./components/RoAppInfo";
+export * from "./components/RoRenderThreadQueue";
 export * from "./coercion";
 
 /**

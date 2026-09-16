@@ -21,6 +21,7 @@ import { Interpreter } from "../../interpreter";
 import { roInvalid } from "./RoInvalid";
 import { BrsComponent } from "./BrsComponent";
 import { RoAppInfo } from "./RoAppInfo";
+import { RoRenderThreadQueue } from "./RoRenderThreadQueue";
 
 /** Map containing a list of brightscript components that can be created. */
 export const BrsObjects = new Map<string, Function>([
@@ -46,6 +47,7 @@ export const BrsObjects = new Map<string, Function>([
     ["rolonginteger", (_: Interpreter, literal: Int64) => new roLongInteger(literal)],
     ["roappinfo", (_: Interpreter) => new RoAppInfo()],
     ["roinvalid", (_: Interpreter) => new roInvalid()],
+    ["rorenderthreadqueue", (_: Interpreter) => new RoRenderThreadQueue()],
 ]);
 
 /**
