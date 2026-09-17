@@ -36,7 +36,7 @@ describe("e2e/resources/components/mocks", () => {
             "create object regex:",
             "roRegex",
             "mock object regex:",
-            "Node",
+            "roSGNode",
             "in name change callback",
             "mock poster name:",
             "poster",

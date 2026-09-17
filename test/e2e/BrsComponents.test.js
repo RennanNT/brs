@@ -334,7 +334,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "group node type:",
-            "Node",
+            "roSGNode",
             "group node subtype:",
             "Group",
             "group node visible:",
@@ -342,7 +342,7 @@ describe("end to end brightscript functions", () => {
             "group node opacity:",
             "1",
             "extended group node type:",
-            "Node",
+            "roSGNode",
             "extended group node subtype:",
             "ExtendedGroup",
             "extended group node visible:",
@@ -359,7 +359,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "layoutGroup node type:",
-            "Node",
+            "roSGNode",
             "layoutGroup node subtype:",
             "LayoutGroup",
             "layoutGroup node layoutDirection:",
@@ -378,7 +378,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "rectangle node type:",
-            "Node",
+            "roSGNode",
             "rectangle node subtype:",
             "Rectangle",
             "rectangle node width:",
@@ -397,7 +397,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "label node type:",
-            "Node",
+            "roSGNode",
             "label node subtype:",
             "Label",
             "label node horizAlign:",
@@ -418,7 +418,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "timer node type:",
-            "Node",
+            "roSGNode",
             "timer node subtype:",
             "Timer",
             "timer node control:",
@@ -437,7 +437,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "font node type:",
-            "Node",
+            "roSGNode",
             "font node subtype:",
             "Font",
             "font node uri:",
@@ -458,7 +458,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "poster node type:",
-            "Node",
+            "roSGNode",
             "poster node subtype:",
             "Poster",
             "poster node width:",
@@ -479,7 +479,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "arraygrid node type:",
-            "Node",
+            "roSGNode",
             "arraygrid node subtype:",
             "ArrayGrid",
             "arraygrid node focusRow:",
@@ -498,7 +498,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "markupgrid node type:",
-            "Node",
+            "roSGNode",
             "markupgrid node subtype:",
             "MarkupGrid",
             "markupgrid node numRows:",
@@ -558,7 +558,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "contentnode node type:",
-            "Node",
+            "roSGNode",
             "contentnode node subtype:",
             "ContentNode",
             "contentnode.ContentType:",
@@ -656,7 +656,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "scene node type:",
-            "Node",
+            "roSGNode",
             "scene node subtype:",
             "Scene",
             "scene node backs exit scene:",
@@ -666,7 +666,7 @@ describe("end to end brightscript functions", () => {
             "scene node background color:",
             "0xEB1010FF",
             "extended scene node type:",
-            "Node",
+            "roSGNode",
             "extended scene node subtype:",
             "ExtendedScene",
             "extended scene node backs exit scene:",
@@ -683,7 +683,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "miniKeyboard node type:",
-            "Node",
+            "roSGNode",
             "miniKeyboard node subtype:",
             "MiniKeyboard",
             "miniKeyboard text:",
@@ -710,7 +710,7 @@ describe("end to end brightscript functions", () => {
 
         expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
             "textEditBox node type:",
-            "Node",
+            "roSGNode",
             "textEditBox node subtype:",
             "TextEditBox",
             "textEditBox text:",

@@ -1,4 +1,12 @@
-import { BrsType, ValueKind, Callable, Int32, BrsString, StdlibArgument } from "../brsTypes";
+import {
+    BrsType,
+    ValueKind,
+    Callable,
+    Int32,
+    BrsString,
+    StdlibArgument,
+    RoSGNode,
+} from "../brsTypes";
 import * as Expr from "../parser/Expression";
 import { Interpreter } from "../interpreter";
 
@@ -13,6 +21,11 @@ export const Type = new Callable("type", {
     impl: (interpreter: Interpreter, variable: BrsType, version: Int32) => {
         switch (variable.kind) {
             case ValueKind.Object:
+                // A SceneGraph node's component name is its subtype ("Node",
+                // "Group", ...) but a Roku reports every node as "roSGNode".
+                if (variable instanceof RoSGNode) {
+                    return new BrsString("roSGNode");
+                }
                 return new BrsString(variable.getComponentName());
             case ValueKind.Interface:
                 return new BrsString(variable.name);
